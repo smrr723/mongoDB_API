@@ -21,11 +21,6 @@ MongoClient.connect("mongodb://localhost:27017/exoplanets", function(err, client
    });
 });
 
-// db.collection("exoplanets").insert({name: "MOS3458", type: "4"});
-
-// include GET, POST, DELETE routes in here.
-
-
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/client/build/index.html');
 });
@@ -52,5 +47,10 @@ app.post('/exoplanets', function(req, res){
 
 app.post('/exoplanets/delete', function(req, res){
    db.collection("exoplanets").remove();
+   res.redirect("/exoplanets");
+});
+
+app.post('/exoplanets/delete/one/', function(req, res){
+   db.collection("exoplanets").remove(req.body);
    res.redirect("/exoplanets");
 });
